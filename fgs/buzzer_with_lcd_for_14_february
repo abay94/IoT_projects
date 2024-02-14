@@ -1,0 +1,44 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+#define BUZZER_PIN 9
+
+// Set the LCD address to 0x27 for a 16 chars and 2 line display
+LiquidCrystal_I2C lcd(0x3F, 16, 2);
+
+
+void setup()
+{
+
+  pinMode(BUZZER_PIN, OUTPUT);
+	// initialize the LCD
+	lcd.begin();
+
+	// Turn on the blacklight and print a message.
+	lcd.backlight();
+	lcd.print("Bugin 14 Aqpan, bizdin meiram emes)))");
+}
+
+void loop()
+{
+	playLoveMelody();
+  delay(2000);
+  for (int i = 0; i < 20; i++) {
+    lcd.scrollDisplayLeft();
+    delay(250);
+  }
+}
+
+void playLoveMelody() {
+  // Define the melody notes (in Hz) and corresponding durations (in milliseconds)
+  int loveMelody[] = {262, 294, 330, 349, 392, 440, 494, 523};
+  int noteDuration = 300; // Duration for each note
+
+  // Play each note of the love melody
+  for (int i = 0; i < 8; i++) {
+    tone(BUZZER_PIN, loveMelody[i], noteDuration);
+    delay(noteDuration); // Wait for the note to finish playing
+    noTone(BUZZER_PIN); // Stop playing the note
+    delay(50); // Add a short pause between notes
+  }
+}
