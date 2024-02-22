@@ -82,10 +82,10 @@ void loop() {
 
   if(analogValueEntry < 800 || analogValueExit < 800){
     Serial.println("Entry or exit: open the bar and leave it open");
-    servo.write(110);
+    servo.write(150);
   } else{
     Serial.println("Leave the bar closed or close it");
-    servo.write(150);
+    servo.write(60);
   }
 
   delay(500);
